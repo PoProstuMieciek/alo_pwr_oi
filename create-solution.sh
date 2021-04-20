@@ -4,7 +4,7 @@ mkdir $name/
 cd $name/
 
 mkdir src/
-touch main.cpp
+touch src/main.cpp
 
 cp ../Makefile ./
-sed -i "s/SOLUTION_NAME/$name/" Makefile
+sed -i "s/SOLUTION_NAME/${name,,}/" Makefile
