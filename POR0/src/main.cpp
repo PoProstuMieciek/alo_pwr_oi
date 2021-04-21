@@ -145,22 +145,20 @@ int main()
     cin >> queries;
 
     Select first, second;
-    int fs, fe, ss, se, invert, answer; // first-start, first-end, second-start, second-end, invert
+    int invert, answer;
     
     for (int i = 0; i < queries; i++)
     {
-        cin >> fs >> fe >> ss >> se;
-        fs--; fe--; ss--; se--;
+        cin >> first.start >> first.end >> second.start >> second.end;
+        first.start--; first.end--; second.start--; second.end--;
+        first.setLength(); second.setLength();
 
         invert = 1;
-        if (fs > ss)
+        if (first.start > second.start)
         {
-            // first larger => swap first with second (first must be smaller)
-            swap(fs, ss); swap(fe, se);
+            swap(first, second);
             invert = -1;
         }
-        first.setRange(fs, fe);
-        second.setRange(ss, se);
     
         answer = query(word, first, second) * invert;
         switch (answer)
