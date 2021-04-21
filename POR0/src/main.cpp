@@ -65,7 +65,7 @@ void build_hash_table(string word, int mod = MOD)
     }
 }
 
-bool hash_is_equal(string word, Select f, Select s, int mod = MOD)
+bool hash_is_equal(string word, Select& f, Select& s, int mod = MOD)
 {
     // different sizes => substrings not equal
     if (f.length != s.length) return false;
@@ -83,7 +83,7 @@ bool hash_is_equal(string word, Select f, Select s, int mod = MOD)
     return hash_f == hash_s;
 }
 
-pair<int, int> bin_search_different_index(string word, Select first, Select second, int mod = MOD)
+pair<int, int> bin_search_different_index(string word, Select& first, Select& second, int mod = MOD)
 {
     Select left_f, left_s;
     int left = 0;
@@ -116,25 +116,24 @@ pair<int, int> bin_search_different_index(string word, Select first, Select seco
     return make_pair(first.start + left, second.start + left);
 }
 
-Answer query(string word, Select first, Select second, int mod = MOD)
+Answer query(string word, Select& first, Select& second, int mod = MOD)
 {
     // if they are equal => instant answer
     if(hash_is_equal(word, first, second, mod)) return Answer::EQUAL;
-    
-    // if they differ in size => instant answer
-    if(first.length > second.length) return Answer::LARGER;
-    else return Answer::SMALLER;
 
     auto index = bin_search_different_index(word, first, second, mod);
     char f = word[index.first];
     char s = word[index.second];
 
     if (f > s) return Answer::LARGER;
-    else return Answer::SMALLER;
+    else       return Answer::SMALLER;
 }
 
 int main()
 {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
     build_base_powers();
 
     string word, output;
@@ -159,8 +158,32 @@ int main()
             swap(first, second);
             invert = -1;
         }
-    
-        answer = query(word, first, second) * invert;
+
+        bool first_trim = false, second_trim = false;
+        if (first.length != second.length)
+        {
+            if(first.length > second.length)
+            {
+                first.end -= (first.length - second.length);
+                first.setLength();
+                first_trim = true;
+            }
+            else
+            {
+                second.end -= (second.length - first.length);
+                second.setLength();
+                second_trim = true;
+            }
+        }
+
+        answer = query(word, first, second);
+        if (answer == Answer::EQUAL)
+        {
+            if (first_trim)  answer = Answer::LARGER; // if first one was longer
+            if (second_trim) answer = Answer::SMALLER;  // if second one was longer
+        }
+        answer *= invert;
+        
         switch (answer)
         {
             case Answer::SMALLER:
