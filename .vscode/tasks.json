@@ -12,7 +12,7 @@
             "type": "shell",
             "label": "rename",
             "command": "cp",
-            "args": ["*.o", "debug.o"],
+            "args": ["*.o", "debug"],
             "options": {
                 "cwd": "${fileDirname}/../bin/"
             }
@@ -21,7 +21,7 @@
             "type": "shell",
             "label": "remove",
             "command": "rm",
-            "args": ["debug.o"],
+            "args": ["debug"],
             "options": {
                 "cwd": "${fileDirname}/../bin/"
             }
