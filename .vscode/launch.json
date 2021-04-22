@@ -8,14 +8,15 @@
             "name": "g++ - Build and debug active file",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${fileDirname}/../bin/por0.o",
+            "program": "${fileDirname}/../bin/debug.o",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${fileDirname}/../",
             "environment": [],
             "externalConsole": false,
             "MIMode": "gdb",
-            "preLaunchTask": "make",
+            "preLaunchTask": "build",
+            "postDebugTask": "remove",
             "miDebuggerPath": "/usr/bin/gdb"
         }
     ]

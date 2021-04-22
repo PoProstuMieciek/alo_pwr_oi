@@ -7,6 +7,28 @@
             "options": {
                 "cwd": "${fileDirname}/../"
             }
+        },
+        {
+            "type": "shell",
+            "label": "rename",
+            "command": "cp",
+            "args": ["*.o", "debug.o"],
+            "options": {
+                "cwd": "${fileDirname}/../bin/"
+            }
+        },
+        {
+            "type": "shell",
+            "label": "remove",
+            "command": "rm",
+            "args": ["debug.o"],
+            "options": {
+                "cwd": "${fileDirname}/../bin/"
+            }
+        },
+        {
+            "label": "build",
+            "dependsOn": ["make", "rename"]
         }
     ],
     "version": "2.0.0"
