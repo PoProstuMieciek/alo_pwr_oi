@@ -54,10 +54,9 @@ Select first, second;
 void build_base_powers()
 {
     base_powers[0] = 1;
-    base_powers[1] = BASE;
 
     size_t length = sizeof(base_powers) / sizeof(long long);
-    for (size_t i = 2; i < length; i++)
+    for (size_t i = 1; i < length; i++)
     {
         base_powers[i] = (base_powers[i-1] * BASE) % MOD;
     }
