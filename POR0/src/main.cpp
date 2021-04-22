@@ -1,5 +1,6 @@
 #include <iostream>
 using namespace std;
+typedef long long ll;
 
 enum Answer
 {
@@ -42,11 +43,11 @@ class Select
 };
 
 const int BASE = 29;
-const int MOD = 1e9 + 7;
+const int MOD = 1e9 + 9;
 const int MAX_LEN = 1e6 + 2;
 
-long long base_powers[MAX_LEN];
-long long hash_table[MAX_LEN];
+ll base_powers[MAX_LEN];
+ll hash_table[MAX_LEN];
 
 string word;
 Select first, second;
@@ -55,7 +56,7 @@ void build_base_powers()
 {
     base_powers[0] = 1;
 
-    size_t length = sizeof(base_powers) / sizeof(long long);
+    size_t length = sizeof(base_powers) / sizeof(ll);
     for (size_t i = 1; i < length; i++)
     {
         base_powers[i] = (base_powers[i-1] * BASE) % MOD;
@@ -75,16 +76,17 @@ void build_hash_table()
 
 bool hash_is_equal(Select& f, Select& s)
 {
-    // different sizes => substrings not equal
-    if (f.length != s.length) return false;
+    ll hash_f = hash_table[f.end];
+    ll hash_s = hash_table[s.end];
     
-    long long hash_f = hash_table[f.end] - hash_table[f.start - 1];
-    long long hash_s = hash_table[s.end] - hash_table[s.start - 1];
+    if(f.start != 0) hash_f -= hash_table[f.start - 1];
+    if(s.start != 0) hash_s -= hash_table[s.start - 1];
+
     if (hash_f < 0) hash_f += MOD;
     if (hash_s < 0) hash_s += MOD;
 
     int power_index = s.start - f.start;
-    long long multiply_by = base_powers[power_index];
+    ll multiply_by = base_powers[power_index];
     hash_f = (hash_f * multiply_by) % MOD;
 
     // if hashes equal => substrings equal
@@ -126,7 +128,6 @@ pair<int, int> bin_search_different_index()
 
 Answer query()
 {
-    // if they are equal => instant answer
     if(hash_is_equal(first, second)) return Answer::EQUAL;
 
     auto index = bin_search_different_index();
