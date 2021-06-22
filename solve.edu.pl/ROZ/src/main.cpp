@@ -2,101 +2,117 @@
 using namespace std;
 
 const int MAX_CITIES = 1e5 + 2;
+const int MAX_ROADS = 2e5 + 2;
+int districts[MAX_CITIES]; // for every city keep its district index
+vector<int> dist_members[MAX_CITIES]; // for every district keep its members
+int total_districts = 0;
+
 vector<pair<int, int>> roads;
-vector<int> graph[MAX_CITIES];
-bool visited[MAX_CITIES];
-int steps = 0;
+vector<pair<int, int>> closed_roads;
+bool is_closed[MAX_ROADS];
+vector<int> answers;
 
-void clean_visited(int total_cities = MAX_CITIES)
+bool road_is_closed(int road_idx)
+{
+    return is_closed[road_idx];
+}
+
+void setup_cities(int total_cities = MAX_CITIES)
 {
     for (int i = 1; i <= total_cities; i++)
     {
-        visited[i] = false;
+        districts[i] = i;
+        dist_members[i].push_back(i);
     }
-    steps = 0;
+    total_districts = total_cities;
 }
 
-void dfs(int start)
+void merge_cities(int city1_idx, int city2_idx)
 {
-    if (visited[start]) return;
-    visited[start] = true;
-    steps++;
+    if (districts[city1_idx] != districts[city2_idx]) total_districts--;
+    else return;
 
-    for (int city : graph[start])
+    int dist1 = districts[city1_idx], dist2 = districts[city2_idx];
+    int smaller = dist1, larger = dist2;
+
+    if (dist_members[dist1].size() > dist_members[dist2].size())
     {
-        // if city is no longer available
-        // if city was already visited, do not even put dfs() call on stack
-        if (!visited[city] && city != 0)
-        {
-            dfs(city);
-        }
+        larger = dist1;
+        smaller = dist2;
+    }
+
+    dist_members[larger].insert(
+        dist_members[larger].end(),
+        dist_members[smaller].begin(),
+        dist_members[smaller].end()
+    );
+
+    for (size_t i = 0; i < dist_members[smaller].size(); i++)
+    {
+        districts[dist_members[smaller][i]] = larger;
     }
 }
 
-void close_road(int road_index)
-{
-    auto road = roads[road_index];
-    int from = road.first, to = road.second;
-
-    for (size_t i = 0; i < graph[from].size(); i++)
-    {
-        if (graph[from][i] == to)
-        {
-            graph[from][i] = 0;
-            break;
-        }
-    }
-    for (size_t i = 0; i < graph[to].size(); i++)
-    {
-        if (graph[to][i] == from)
-        {
-            graph[to][i] = 0;
-            break;
-        }
-    }
-}
-
-int districts(int total_cities = MAX_CITIES)
-{
-    int total_districts = 0;
-
-    for (int i = 1; i <= total_cities; i++)
-    {
-        steps = 0;
-        dfs(i);
-
-        if (steps > 0) total_districts++;
-    }
-
-    return total_districts;
-}
+// void debug_districts(int total_cities = MAX_CITIES)
+// {
+//     printf("total_districts: %i\n", total_districts);
+//     for (int i = 1; i <= total_cities; i++)
+//     {
+//         printf("city %i -> district %i (", i, districts[i]);
+//         for (size_t j = 0; j < dist_members[i].size(); j++)
+//         {
+//             printf("%i ", dist_members[i][j]);
+//         }
+//         printf(")\n");
+//     }
+//     printf("\n");
+// }
 
 int main()
 {
-    int total_cities, total_roads;
+    int total_cities, total_roads, total_closed_roads;
     scanf("%i %i", &total_cities, &total_roads);
     for (int i = 0; i < total_roads; i++)
     {
         int city1, city2;
         scanf("%i %i", &city1, &city2);
-
-        graph[city1].push_back(city2);
-        graph[city2].push_back(city1);
         roads.push_back({ city1, city2 });
     }
+    setup_cities(total_cities);
 
-    int closed_roads;
-    scanf("%i", &closed_roads);
-    for (int i = 0; i < closed_roads; i++)
+    scanf("%i", &total_closed_roads);
+    for (int i = 0; i < total_closed_roads; i++)
     {
-        clean_visited(total_cities);
-
-        int closed_road_index;
-        scanf("%i", &closed_road_index);
-
-        close_road(closed_road_index - 1);
-        printf("%i ", districts(total_cities));
+        int road_idx;
+        scanf("%i", &road_idx);
+        is_closed[road_idx - 1] = true;
+        closed_roads.push_back(roads[road_idx - 1]);
     }
 
+    // printf("begin\n"); debug_districts(total_cities);
+
+    for (int i = 0; i < total_roads; i++)
+    {
+        auto road = roads[i];
+        if (!road_is_closed(i)) merge_cities(road.first, road.second);
+    }
+
+    // printf("after input\n"); debug_districts(total_cities);
+
+    for (int i = closed_roads.size() - 1; i >= 0; i--)
+    {
+        auto road = closed_roads[i];
+
+        answers.push_back(total_districts);
+
+        // printf("before merging (%i, %i)\n", road.first, road.second); debug_districts(total_cities);
+        merge_cities(road.first, road.second);
+        // printf("after merging (%i, %i)\n", road.first, road.second); debug_districts(total_cities);
+    }
+
+    for (int i = answers.size() - 1; i >= 0; i--)
+    {
+        printf("%i ", answers[i]);
+    }
     printf("\n");
 }
