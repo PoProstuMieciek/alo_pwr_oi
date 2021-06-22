@@ -1,4 +1,4 @@
-TARGET := ./bin/roz.o
+TARGET := ./bin/roz2.o
 CXX := g++
 CXXFLAGS := -std=c++11 -Wall -Wextra -Wno-unused-parameter -Wno-unused-result -g
 LDFLAGS := 
