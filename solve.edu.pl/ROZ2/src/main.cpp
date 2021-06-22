@@ -53,21 +53,6 @@ void merge_cities(int city1_idx, int city2_idx)
     }
 }
 
-// void debug_districts(int total_cities = MAX_CITIES)
-// {
-//     printf("total_districts: %i\n", total_districts);
-//     for (int i = 1; i <= total_cities; i++)
-//     {
-//         printf("city %i -> district %i (", i, districts[i]);
-//         for (size_t j = 0; j < dist_members[i].size(); j++)
-//         {
-//             printf("%i ", dist_members[i][j]);
-//         }
-//         printf(")\n");
-//     }
-//     printf("\n");
-// }
-
 int main()
 {
     int total_cities, total_roads, total_closed_roads;
@@ -89,15 +74,11 @@ int main()
         closed_roads.push_back(roads[road_idx - 1]);
     }
 
-    // printf("begin\n"); debug_districts(total_cities);
-
     for (int i = 0; i < total_roads; i++)
     {
         auto road = roads[i];
         if (!road_is_closed(i)) merge_cities(road.first, road.second);
     }
-
-    // printf("after input\n"); debug_districts(total_cities);
 
     for (int i = closed_roads.size() - 1; i >= 0; i--)
     {
@@ -105,9 +86,7 @@ int main()
 
         answers.push_back(total_districts);
 
-        // printf("before merging (%i, %i)\n", road.first, road.second); debug_districts(total_cities);
         merge_cities(road.first, road.second);
-        // printf("after merging (%i, %i)\n", road.first, road.second); debug_districts(total_cities);
     }
 
     for (int i = answers.size() - 1; i >= 0; i--)
