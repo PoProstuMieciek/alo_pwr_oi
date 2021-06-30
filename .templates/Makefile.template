@@ -40,5 +40,8 @@ run: $(TARGET)
 test: $(TEST_TARGET)
 	$(TEST_TARGET)
 
+test.sh: $(TARGET)
+	$(TEST_DIR)/test.sh
+
 clean:
 	rm -rf $(BIN_DIR) $(OBJ_DIR)
