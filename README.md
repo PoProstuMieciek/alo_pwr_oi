@@ -16,6 +16,7 @@ Easy:
 * `solve.edu.pl/SUM2` (Sumowanie bignumów, 100/100 OK) - simple bignum addition, written addition on strings
 * `solve.edu.pl/ULA` (Ułamek zwykły, 100/100 OK) - multiplying three fractions together, simplifying the result
 * `solve.edu.pl/ULA1` (Dodawanie ułamków, 100/100 OK) - adding two fractions, bringing to the common denominator, simplifying the result
+* `spoj.com/AL_10_07` (Eksperyment, 0/100 TLE) - wrong solution
 
 std::queue:
 * `solve.edu.pl/POP` (Pan tu nie stał, 100/100 OK) - basic queue operations
