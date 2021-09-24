@@ -10,6 +10,7 @@ Easy:
 * `solve.edu.pl/SPO0` (Sportowcy, 100/100 OK) - sorting an array with custom rules
 * `solve.edu.pl/STO2` (Stolica, 100/100 OK) - sorting cities by number of roads (ascending)
 * `solve.edu.pl/STO3` (Anty-stolica, 100/100 OK) - sorting cities by number of roads (descending)
+* `spoj.com/FR_07_12` (Czerwone mrówki, 100/100 OK) - finding rectangle bounds of given points
 * `solve.edu.pl/BIN0` (System binarny, 100/100 OK) - base10 to base2 conversion
 * `solve.edu.pl/CYF0` (Cyfry w zapisie trójkowym, 100/100 OK) - base10 to base3 conversion
 * `solve.edu.pl/ULA3` (Ułamki, 100/100 OK) - periodic fraction to decimal fraction conversion
