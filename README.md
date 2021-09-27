@@ -10,16 +10,16 @@ Easy:
 * `solve.edu.pl/SPO0` (Sportowcy, 100/100 OK) - sorting an array with custom rules
 * `solve.edu.pl/STO2` (Stolica, 100/100 OK) - sorting cities by number of roads (ascending)
 * `solve.edu.pl/STO3` (Anty-stolica, 100/100 OK) - sorting cities by number of roads (descending)
-* `spoj.com/FR_07_12` (Czerwone mrówki, 100/100 OK) - finding rectangle bounds of given points
-* `spoj.com/FR_09_12` (Kolumny mrówek, 100/100 OK)
+* `pl.spoj.com/FR_07_12` (Czerwone mrówki, 100/100 OK) - finding rectangle bounds of given points
+* `pl.spoj.com/FR_09_12` (Kolumny mrówek, 100/100 OK)
 * `solve.edu.pl/BIN0` (System binarny, 100/100 OK) - base10 to base2 conversion
 * `solve.edu.pl/CYF0` (Cyfry w zapisie trójkowym, 100/100 OK) - base10 to base3 conversion
 * `solve.edu.pl/ULA3` (Ułamki, 100/100 OK) - periodic fraction to decimal fraction conversion
 * `solve.edu.pl/SUM2` (Sumowanie bignumów, 100/100 OK) - simple bignum addition, written addition on strings
 * `solve.edu.pl/ULA` (Ułamek zwykły, 100/100 OK) - multiplying three fractions together, simplifying the result
 * `solve.edu.pl/ULA1` (Dodawanie ułamków, 100/100 OK) - adding two fractions, bringing to the common denominator, simplifying the result
-* `spoj.com/AL_10_07` (Eksperyment, 0/100 TLE) - wrong solution (bruteforce)
-* `spoj.com/AL_01_01` (Napój Jasia, 0/100 TLE) - wrong solution (bruteforce)
+* `pl.spoj.com/AL_10_07` (Eksperyment, 0/100 TLE) - wrong solution (bruteforce)
+* `pl.spoj.com/AL_01_01` (Napój Jasia, 0/100 TLE) - wrong solution (bruteforce)
 
 std::queue:
 * `solve.edu.pl/POP` (Pan tu nie stał, 100/100 OK) - basic queue operations
