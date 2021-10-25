@@ -20,6 +20,7 @@ Easy:
 * `solve.edu.pl/ULA1` (Dodawanie ułamków, 100/100 OK) - adding two fractions, bringing to the common denominator, simplifying the result
 * `pl.spoj.com/AL_10_07` (Eksperyment, 0/100 TLE) - wrong solution (bruteforce)
 * `pl.spoj.com/AL_01_01` (Napój Jasia, 0/100 TLE) - wrong solution (bruteforce)
+* `pl.spoj.com/AL_31_10` (Nadaktywna litera, 0/100 WA) - correct solution, broken input handling
 
 std::queue:
 * `solve.edu.pl/POP` (Pan tu nie stał, 100/100 OK) - basic queue operations
