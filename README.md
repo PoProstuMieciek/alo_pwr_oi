@@ -21,6 +21,7 @@ Easy:
 * `pl.spoj.com/AL_10_07` (Eksperyment, 0/100 TLE) - wrong solution (bruteforce)
 * `pl.spoj.com/AL_01_01` (Napój Jasia, 0/100 TLE) - wrong solution (bruteforce)
 * `pl.spoj.com/AL_31_10` (Nadaktywna litera, 0/100 WA) - correct solution, broken input handling
+* `pl.spoj.com/AL_20_02` (Ciąg arytmetyczny, 0/100 WA) - correct solution, bug somewhere
 
 std::queue:
 * `solve.edu.pl/POP` (Pan tu nie stał, 100/100 OK) - basic queue operations
